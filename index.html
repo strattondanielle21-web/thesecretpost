@@ -69,7 +69,7 @@ footer .wrap span:first-child{opacity:.85}
 .hero .note{font-family:var(--type);font-size:.9rem;margin-top:1.25rem;opacity:.9}
 
 /* envelope */
-.stage{position:relative;order:-1;width:min(460px,100%);margin:0 auto;padding-top:10.5rem}
+.stage{position:relative;order:-1;width:min(460px,100%);margin:0 auto;padding-top:5rem;transition:padding-top .3s ease}
 .post{position:relative}
 .env{display:block;position:relative;z-index:2;width:100%;padding:0;border:0;background:none;cursor:pointer;transform:rotate(-3deg);
   transition:transform .3s;filter:drop-shadow(8px 8px 0 var(--cobalt-deep))}
@@ -79,12 +79,11 @@ footer .wrap span:first-child{opacity:.85}
 .post.open .fl{opacity:0}
 .lt{position:absolute;z-index:3;pointer-events:none;left:6%;right:6%;bottom:3%;background:#c4d9ee;color:#10139a;font-family:var(--type);font-size:1.12rem;line-height:1.36;
   padding:.9rem .9rem 1rem;border-radius:3px;box-shadow:6px 6px 0 var(--cobalt-deep);opacity:0;transform:translateY(0) rotate(0);
-  transition:transform .7s cubic-bezier(.2,.8,.2,1) .15s,opacity .3s .15s}
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .2s}
 .post.open .lt{opacity:1;transform:translateY(-4%) rotate(2deg)}
 .lt .meta{display:flex;justify-content:space-between;gap:1rem;font-size:1.05rem;margin-bottom:.6rem}
 .lt p{margin:0 0 .6rem}.lt p:last-child{margin:0}
-@media(min-width:860px){.stage{transition:padding-top .5s ease}.stage:has(.post.open){padding-top:15rem}}
-@media(max-width:859px){.stage{padding-top:12.5rem;transition:padding-top .5s ease}.stage:has(.post.open){padding-top:26rem}}
+@media(max-width:859px){.stage{padding-top:2.5rem}}
 .hint{font-family:var(--type);text-align:center;margin:1.25rem 0 0;font-size:.95rem}
 
 /* sections */
@@ -141,10 +140,14 @@ h2{font-size:clamp(2.1rem,5vw,3.4rem);margin-bottom:1.5rem;max-width:18ch}
 
 .final{text-align:center;position:relative;overflow:hidden}
 .final h2{margin:0 auto 1.5rem;max-width:14ch}
-.final .star{position:absolute;color:var(--red)}
-.final .doodles{display:none}
-@media(min-width:700px){.final .doodles{display:block;position:absolute;inset:0;pointer-events:none}.final .doodles>svg{position:absolute}}
-@media(max-width:699px){.final{padding-top:8rem;padding-bottom:7rem}.final .star:nth-of-type(2){bottom:18px!important;right:10%!important}.final .star:first-of-type{width:64px!important;height:64px!important;left:50%!important;top:28px!important;margin-left:-32px}}
+.final .doodles{position:absolute;inset:0;pointer-events:none;z-index:0}
+.final .wrap{position:relative;z-index:1}
+.final .doodles .star{position:absolute}
+.final .d1{width:340px;height:340px;left:-50px;top:50%;margin-top:-170px;transform:rotate(-14deg);color:#f7b8a8}
+.final .d7{width:300px;height:300px;right:-40px;top:50%;margin-top:-150px;transform:rotate(18deg);color:#b8c2f7}
+@media(max-width:699px){.final{padding-top:6rem;padding-bottom:6rem}
+.final .d1{width:230px;height:230px;left:-60px;top:-50px;margin-top:0}
+.final .d7{width:210px;height:210px;right:-55px;top:auto;bottom:-45px;margin-top:0}}
 footer{background:var(--cobalt-deep);color:var(--cream);padding:2rem 0;font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 
@@ -299,19 +302,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 </section>
 
 <section class="final">
-  <svg class="star" viewBox="0 0 100 100" style="width:110px;height:110px;left:4%;top:30px;transform:rotate(-14deg)"><use href="#s"/></svg>
-  <svg class="star" viewBox="0 0 100 100" style="width:70px;height:70px;right:8%;bottom:40px;transform:rotate(22deg);color:var(--cobalt)"><use href="#s5"/></svg>
   <div class="doodles" aria-hidden="true">
-    <svg class="star" viewBox="0 0 100 100" style="width:44px;height:44px;left:17%;top:34%;transform:rotate(10deg);color:var(--cobalt)"><use href="#s5"/></svg>
-    <svg class="star" viewBox="0 0 100 100" style="width:36px;height:36px;left:9%;bottom:16%;transform:rotate(-20deg)"><use href="#h"/></svg>
-    <svg class="star" viewBox="0 0 100 100" style="width:58px;height:58px;left:25%;bottom:12%;transform:rotate(18deg);color:var(--red)"><use href="#s5"/></svg>
-    <svg class="star" viewBox="0 0 100 100" style="width:40px;height:40px;right:20%;top:16%;transform:rotate(-12deg);color:var(--cobalt)"><use href="#h"/></svg>
-    <svg class="star" viewBox="0 0 100 100" style="width:84px;height:84px;right:7%;top:20%;transform:rotate(15deg)"><use href="#s"/></svg>
-    <svg class="star" viewBox="0 0 100 100" style="width:30px;height:30px;right:27%;bottom:20%;transform:rotate(30deg);color:var(--red)"><use href="#s5"/></svg>
-    <svg viewBox="0 0 120 30" style="position:absolute;left:12%;top:14%;width:110px;fill:none;stroke:var(--cobalt);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round"><path d="M4 18 q10 -16 20 0 t20 0 t20 0 t20 0 t20 0"/></svg>
-    <svg viewBox="0 0 120 30" style="position:absolute;right:13%;bottom:12%;width:100px;fill:none;stroke:var(--red);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;transform:rotate(-6deg)"><path d="M4 18 q10 -16 20 0 t20 0 t20 0 t20 0 t20 0"/></svg>
-    <svg viewBox="0 0 60 60" style="position:absolute;left:35%;top:12%;width:34px;fill:none;stroke:var(--red);stroke-width:3;stroke-linecap:round"><path d="M30 6 V54 M6 30 H54 M14 14 L46 46 M46 14 L14 46"/></svg>
-    <svg viewBox="0 0 60 60" style="position:absolute;right:35%;bottom:10%;width:28px;fill:none;stroke:var(--cobalt);stroke-width:3;stroke-linecap:round"><path d="M30 6 V54 M6 30 H54 M14 14 L46 46 M46 14 L14 46"/></svg>
+    <svg class="star d1" viewBox="0 0 100 100"><use href="#s"/></svg>
+    <svg class="star d7" viewBox="0 0 100 100"><use href="#s5"/></svg>
   </div>
   <div class="wrap">
     <h2>Go check your mailbox.</h2>
@@ -329,11 +322,35 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 <script>
 (function(){
   var post=document.getElementById('post'),btn=document.getElementById('envBtn'),hint=document.getElementById('hint');
-  btn.addEventListener('click',function(){
-    var open=post.classList.toggle('open');
+  var stage=document.querySelector('.stage');
+  var calm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function setOpen(open){
+    post.classList.toggle('open',open);
     btn.setAttribute('aria-expanded',open);
     btn.setAttribute('aria-label',open?'Close the envelope':'Open the envelope');
     hint.textContent=open?'Tap again to tuck it back in':'Tap the envelope to open it';
+  }
+  var nav=document.querySelector('.nav');
+  function px(v){return parseFloat(v)||0}
+  btn.addEventListener('click',function(){
+    if(post.classList.contains('open')){setOpen(false);stage.style.paddingTop='';return}
+    var lt=document.getElementById('lt'),vh=window.innerHeight;
+    var base=px(getComputedStyle(stage).paddingTop);
+    // find just enough room so the open letter clears the header
+    stage.style.transition='none';
+    var p=base,r;
+    for(var k=0;k<8;k++){
+      stage.style.paddingTop=p+'px';void stage.offsetHeight;
+      r=lt.getBoundingClientRect();
+      var def=nav.getBoundingClientRect().bottom+6-(r.top-r.height*0.04-8);
+      if(def<=1)break;p+=def;
+    }
+    var fTop=r.top-r.height*0.04-8,fBot=r.bottom-r.height*0.04;
+    var dy=0;
+    if(!(fTop>=6&&fBot<=vh-6))dy=r.height<=vh-24?fTop-(vh-r.height)/2:fTop-12;
+    stage.style.paddingTop='';void stage.offsetHeight;stage.style.transition='';
+    stage.style.paddingTop=p+'px';setOpen(true);
+    if(dy)window.scrollBy({top:dy,behavior:calm?'auto':'smooth'});
   });
 })();
 </script>
