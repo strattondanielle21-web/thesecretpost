@@ -72,11 +72,16 @@ footer .wrap span:first-child{opacity:.85}
 .stage{position:relative;order:-1;width:min(460px,100%);margin:0 auto;padding-top:5rem;transition:padding-top .3s ease}
 .post{position:relative}
 .env{display:block;position:relative;z-index:2;width:100%;padding:0;border:0;background:none;cursor:pointer;transform:rotate(-3deg);
-  transition:transform .3s;filter:drop-shadow(8px 8px 0 var(--cobalt-deep))}
-.env:hover{transform:rotate(-1deg) scale(1.02)}
+  transition:transform .3s;filter:drop-shadow(8px 8px 0 var(--cobalt-deep));animation:envWiggle 3.2s ease-in-out infinite}
+.env:hover{animation-play-state:paused;transform:rotate(-1deg) scale(1.02)}
 .env svg{display:block;width:100%;height:auto}
 .fl{transition:opacity .3s}
 .post.open .fl{opacity:0}
+.post.open .env{animation:none}
+@keyframes envWiggle{0%,82%,100%{transform:rotate(-3deg) scale(1)}88%{transform:rotate(-7deg) scale(1.03)}94%{transform:rotate(2deg) scale(1.03)}}
+@media(prefers-reduced-motion:reduce){.env{animation:none}}
+.hint-on-env{transition:opacity .2s}
+.post.open .hint-on-env{opacity:0}
 .lt{position:absolute;z-index:3;pointer-events:none;left:6%;right:6%;bottom:3%;background:#c4d9ee;color:#10139a;font-family:var(--type);font-size:1.12rem;line-height:1.36;
   padding:.9rem .9rem 1rem;border-radius:3px;box-shadow:6px 6px 0 var(--cobalt-deep);opacity:0;transform:translateY(0) rotate(0);
   transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .2s}
@@ -84,7 +89,6 @@ footer .wrap span:first-child{opacity:.85}
 .lt .meta{display:flex;justify-content:space-between;gap:1rem;font-size:1.05rem;margin-bottom:.6rem}
 .lt p{margin:0 0 .6rem}.lt p:last-child{margin:0}
 @media(max-width:859px){.stage{padding-top:2.5rem}}
-.hint{font-family:var(--type);text-align:center;margin:1.25rem 0 0;font-size:.95rem}
 
 /* sections */
 section{padding:5rem 0}
@@ -211,6 +215,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
               <path d="M16 274 L150 152"/><path d="M384 274 L250 152"/>
               <defs><filter id="ink" x="-5%" y="-8%" width="110%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5"/></filter></defs>
               <g font-family="'Gochi Hand','Comic Sans MS',cursive" text-anchor="middle" fill="#e8302f" stroke="#e8302f" stroke-width="1.4" stroke-linejoin="round" filter="url(#ink)"><g transform="rotate(-2 200 70)"><text x="108.5" y="70" font-size="58" transform="rotate(-6 108.5 70)">T</text><text x="133.5" y="67" font-size="50" transform="rotate(4 133.5 67)">h</text><text x="155.5" y="72" font-size="47" transform="rotate(-3 155.5 72)">e</text><text x="195.5" y="68" font-size="60" transform="rotate(5 195.5 68)">S</text><text x="219.5" y="73" font-size="49" transform="rotate(-4 219.5 73)">e</text><text x="239.5" y="69" font-size="46" transform="rotate(3 239.5 69)">c</text><text x="257.5" y="72" font-size="47" transform="rotate(-5 257.5 72)">r</text><text x="276.5" y="67" font-size="50" transform="rotate(4 276.5 67)">e</text><text x="296.0" y="71" font-size="45" transform="rotate(-2 296.0 71)">t</text></g><g transform="rotate(1.5 200 258)"><text x="166.5" y="258" font-size="68" transform="rotate(-5 166.5 258)">P</text><text x="196.5" y="261" font-size="58" transform="rotate(4 196.5 261)">o</text><text x="220.5" y="255" font-size="56" transform="rotate(-3 220.5 255)">s</text><text x="241.0" y="260" font-size="54" transform="rotate(6 241.0 260)">t</text></g></g>
+              <text class="hint-on-env" x="200" y="100" text-anchor="middle" font-family="'Special Elite','Courier New',monospace" font-size="16" letter-spacing=".5" fill="#e8302f" stroke="none" transform="rotate(-1.5 200 100)">(tap to open me!)</text>
               <ellipse cx="200" cy="166" rx="34" ry="42" fill="#fbf0da"/>
               <use href="#s" x="176" y="142" width="48" height="48" style="color:#e8302f;fill:#e8302f"/>
               <use href="#s5" x="34" y="138" width="62" height="62" style="color:#e8302f;fill:#e8302f" transform="rotate(-10 65 169)"/>
@@ -218,7 +223,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
             </svg>
           </button>
         </div>
-        <p class="hint" id="hint">Tap the envelope to open it</p>
       </div>
     </div>
   </div>
@@ -322,14 +326,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 
 <script>
 (function(){
-  var post=document.getElementById('post'),btn=document.getElementById('envBtn'),hint=document.getElementById('hint');
+  var post=document.getElementById('post'),btn=document.getElementById('envBtn');
   var stage=document.querySelector('.stage');
   var calm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   function setOpen(open){
     post.classList.toggle('open',open);
     btn.setAttribute('aria-expanded',open);
     btn.setAttribute('aria-label',open?'Close the envelope':'Open the envelope');
-    hint.textContent=open?'Tap again to tuck it back in':'Tap the envelope to open it';
   }
   var nav=document.querySelector('.nav');
   function px(v){return parseFloat(v)||0}
